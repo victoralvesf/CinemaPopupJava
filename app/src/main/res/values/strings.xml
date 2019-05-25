@@ -3,4 +3,7 @@
     <string name="popular">Popular</string>
     <string name="top_rated">Melhor Avaliados</string>
     <string name="upcoming">Novidades</string>
+    <string name="reviews">Resenhas</string>
+    <string name="trailers">Trailers</string>
+    <string name="sinopse">Sinopse</string>
 </resources>

@@ -92,7 +92,11 @@ public class MovieActivity extends AppCompatActivity {
                 movieRating.setVisibility(View.VISIBLE);
                 movieRating.setRating(movie.getRating() / 2);
                 getGenres(movie);
-                movieReleaseDate.setText(movie.getReleaseDate());
+
+                String releaseDateArray[] = movie.getReleaseDate().split("-");
+                String releaseDate = "Lançamento: " + releaseDateArray[2] + "/" + releaseDateArray[1] + "/" + releaseDateArray[0];
+
+                movieReleaseDate.setText(releaseDate);
                 Glide.with(MovieActivity.this)
                         .load(IMAGE_BASE_URL + movie.getBackdrop())
                         .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
@@ -197,6 +201,6 @@ public class MovieActivity extends AppCompatActivity {
     }
 
     private void showError() {
-        Toast.makeText(MovieActivity.this, "Please check your internet connection.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(MovieActivity.this, "Sem conexão!", Toast.LENGTH_SHORT).show();
     }
 }
