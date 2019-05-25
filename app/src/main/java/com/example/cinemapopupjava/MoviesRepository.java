@@ -1,7 +1,5 @@
 package com.example.cinemapopupjava;
 
-import android.support.annotation.NonNull;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -10,8 +8,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MoviesRepository {
 
+    public static final String POPULAR = "popular";
+    public static final String TOP_RATED = "top_rated";
+    public static final String UPCOMING = "upcoming";
+
     private static final String BASE_URL = "https://api.themoviedb.org/3/";
-    private static final String LANGUAGE = "en-US";
+    private static final String LANGUAGE = "pt-BR";
+    private static final String TMDB_API_KEY = "bea2955916ca928e0f50c4b1f1008a8c";
 
     private static MoviesRepository repository;
 
@@ -58,23 +61,23 @@ public class MoviesRepository {
 
         switch (sortBy) {
             case TOP_RATED:
-                api.getTopRatedMovies(BuildConfig.TMDB_API_KEY, LANGUAGE, page)
+                api.getTopRatedMovies(TMDB_API_KEY, LANGUAGE, page)
                         .enqueue(call);
                 break;
             case UPCOMING:
-                api.getUpcomingMovies(BuildConfig.TMDB_API_KEY, LANGUAGE, page)
+                api.getUpcomingMovies(TMDB_API_KEY, LANGUAGE, page)
                         .enqueue(call);
                 break;
             case POPULAR:
             default:
-                api.getPopularMovies(BuildConfig.TMDB_API_KEY, LANGUAGE, page)
+                api.getPopularMovies(TMDB_API_KEY, LANGUAGE, page)
                         .enqueue(call);
                 break;
         }
     }
 
     public void getGenres(final OnGetGenresCallback callback) {
-        api.getGenres(BuildConfig.TMDB_API_KEY, LANGUAGE)
+        api.getGenres(TMDB_API_KEY, LANGUAGE)
                 .enqueue(new Callback<GenresResponse>() {
                     @Override
                     public void onResponse(Call<GenresResponse> call, Response<GenresResponse> response) {
@@ -92,6 +95,78 @@ public class MoviesRepository {
 
                     @Override
                     public void onFailure(Call<GenresResponse> call, Throwable t) {
+                        callback.onError();
+                    }
+                });
+    }
+
+    public void getMovie(int movieId, final OnGetMovieCallback callback) {
+        api.getMovie(movieId, TMDB_API_KEY, LANGUAGE)
+                .enqueue(new Callback<Movie>() {
+                    @Override
+                    public void onResponse(Call<Movie> call, Response<Movie> response) {
+                        if (response.isSuccessful()) {
+                            Movie movie = response.body();
+                            if (movie != null) {
+                                callback.onSuccess(movie);
+                            } else {
+                                callback.onError();
+                            }
+                        } else {
+                            callback.onError();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Movie> call, Throwable t) {
+                        callback.onError();
+                    }
+                });
+    }
+
+    public void getTrailers(int movieId, final OnGetTrailersCallback callback) {
+        api.getTrailers(movieId, TMDB_API_KEY, LANGUAGE)
+                .enqueue(new Callback<TrailerResponse>() {
+                    @Override
+                    public void onResponse(Call<TrailerResponse> call, Response<TrailerResponse> response) {
+                        if (response.isSuccessful()) {
+                            TrailerResponse trailerResponse = response.body();
+                            if (trailerResponse != null && trailerResponse.getTrailers() != null) {
+                                callback.onSuccess(trailerResponse.getTrailers());
+                            } else {
+                                callback.onError();
+                            }
+                        } else {
+                            callback.onError();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<TrailerResponse> call, Throwable t) {
+                        callback.onError();
+                    }
+                });
+    }
+
+    public void getReviews(int movieId, final OnGetReviewsCallback callback) {
+        api.getReviews(movieId, TMDB_API_KEY, LANGUAGE)
+                .enqueue(new Callback<ReviewResponse>() {
+                    @Override
+                    public void onResponse(Call<ReviewResponse> call, Response<ReviewResponse> response) {
+                        if (response.isSuccessful()) {
+                            ReviewResponse reviewResponse = response.body();
+                            if (reviewResponse != null && reviewResponse.getReviews() != null) {
+                                callback.onSuccess(reviewResponse.getReviews());
+                            } else {
+                                callback.onError();
+                            }
+                        } else {
+                            callback.onError();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ReviewResponse> call, Throwable t) {
                         callback.onError();
                     }
                 });
