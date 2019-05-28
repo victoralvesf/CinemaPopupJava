@@ -180,4 +180,11 @@ public class MainActivity extends AppCompatActivity {
     private void showError() {
         Toast.makeText(MainActivity.this, "Sem conexão!", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
+    }
 }

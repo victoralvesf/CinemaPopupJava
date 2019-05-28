@@ -73,7 +73,6 @@
                     android:imeActionLabel="@string/action_sign_in"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
-                    android:textColor="#fff"
                     android:maxLines="1"
                     android:singleLine="true" />
 
