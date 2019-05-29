@@ -10,6 +10,7 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_senha">Senha</string>
+    <string name="prompt_conf_senha">Confirmar Senha</string>
     <string name="action_login">Login</string>
     <string name="action_sign_in">Cadastro</string>
     <string name="reset_senha">Esqueci minha senha</string>

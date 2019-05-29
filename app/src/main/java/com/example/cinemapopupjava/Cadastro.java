@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Cadastro extends AppCompatActivity {
 
-    private EditText editEmail, editSenha;
+    private EditText editEmail, editSenha, confSenha;
     private Button btnCadastro, btnVoltar;
 
     private FirebaseAuth auth;
@@ -41,11 +41,23 @@ public class Cadastro extends AppCompatActivity {
         btnCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String empty = "";
                 String email = editEmail.getText().toString().trim();
                 String senha = editSenha.getText().toString().trim();
-                criarUsuario(email, senha);
+                String confirmaSenha = confSenha.getText().toString().trim();
+                if (((email.equals(empty) || senha.equals(empty)) || (email == null) || senha == null)) {
+                    alert("É necessário informar e-mail e senha!");
+                } else if (senha.equals(confirmaSenha)) {
+                    criarUsuario(email, senha);
+                } else {
+                    alert("As senhas não são iguais!");
+                }
             }
         });
+    }
+
+    private void alert(String s) {
+        Toast.makeText(Cadastro.this,s,Toast.LENGTH_SHORT).show();
     }
 
     private void criarUsuario (String email, String senha) {
@@ -73,6 +85,7 @@ public class Cadastro extends AppCompatActivity {
         editSenha = (EditText) findViewById(R.id.editCadSenha);
         btnCadastro = (Button) findViewById(R.id.btnNewCadastro);
         btnVoltar = (Button) findViewById(R.id.btnVoltarLogin);
+        confSenha = (EditText) findViewById(R.id.editCadConfSenha);
     }
 
     @Override

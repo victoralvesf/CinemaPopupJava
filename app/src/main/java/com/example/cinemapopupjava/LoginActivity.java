@@ -47,9 +47,14 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                String empty = "";
                 String email = editEmail.getText().toString().trim();
                 String senha = editSenha.getText().toString().trim();
-                login(email, senha);
+                if (((email.equals(empty) || senha.equals(empty)) || (email == null) || senha == null)) {
+                    alert("É necessário informar e-mail e senha!");
+                } else {
+                    login(email, senha);
+                }
             }
         });
     }
