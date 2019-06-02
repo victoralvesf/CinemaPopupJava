@@ -16,8 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
-            android:label="@string/activity_login">
+            android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,6 +26,8 @@
         <activity
             android:name=".Cadastro"
             android:label="@string/action_sign_in"></activity>
+        <activity android:name=".ResetPassword">
+        </activity>
         <activity android:name=".MainActivity">
         </activity>
         <activity android:name=".MovieActivity" />

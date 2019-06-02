@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText editEmail, editSenha;
     private Button btnLogin, btnCadastro;
-    private TextView txtResetSenha;
+    private TextView btnResetSenha;
 
     private FirebaseAuth auth;
 
@@ -57,6 +57,13 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+        btnResetSenha.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this , ResetPassword.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void login(String email, String senha) {
@@ -83,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
         editSenha = (EditText) findViewById(R.id.editLoginSenha);
         btnLogin = (Button) findViewById(R.id.btnLoginEntrar);
         btnCadastro = (Button) findViewById(R.id.btnLoginCadastro);
+        btnResetSenha = (TextView) findViewById(R.id.txtResetSenha);
     }
 
     @Override

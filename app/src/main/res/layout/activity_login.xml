@@ -47,7 +47,8 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="#fff">
+                android:textColorHint="#fff"
+                android:textColor="#fff">
 
                 <AutoCompleteTextView
                     android:id="@+id/editLoginEmail"
@@ -65,7 +66,8 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="#fff">
+                android:textColorHint="#fff"
+                android:textColor="#fff">
 
                 <EditText
                     android:id="@+id/editLoginSenha"
@@ -78,7 +80,8 @@
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textColor="#fff"/>
 
             </android.support.design.widget.TextInputLayout>
 

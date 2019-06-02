@@ -50,7 +50,7 @@ public class Cadastro extends AppCompatActivity {
                 } else if (senha.equals(confirmaSenha)) {
                     criarUsuario(email, senha);
                 } else {
-                    alert("As senhas não são iguais!");
+                    alert("As senhas não coincidem!");
                 }
             }
         });
@@ -70,7 +70,7 @@ public class Cadastro extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    alerta("Erro ao criar usuário");
+                    alerta("E-mail já cadastrado!");
                 }
             }
         });

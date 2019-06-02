@@ -11,8 +11,10 @@
     <string name="prompt_email">Email</string>
     <string name="prompt_senha">Senha</string>
     <string name="prompt_conf_senha">Confirmar Senha</string>
-    <string name="action_login">Login</string>
+    <string name="action_login">Entrar</string>
     <string name="action_sign_in">Cadastro</string>
     <string name="reset_senha">Esqueci minha senha</string>
     <string name="voltar">Voltar</string>
+    <string name="resetPageInfo">Você receberá um e-mail para redefinir sua senha.</string>
+    <string name="enviarEmail">Enviar</string>
 </resources>
