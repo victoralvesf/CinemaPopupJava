@@ -17,4 +17,5 @@
     <string name="voltar">Voltar</string>
     <string name="resetPageInfo">Você receberá um e-mail para redefinir sua senha.</string>
     <string name="enviarEmail">Enviar</string>
+    <string name="facebook_app_id">321825535410236</string> <string name="fb_login_protocol_scheme">fb321825535410236</string>
 </resources>

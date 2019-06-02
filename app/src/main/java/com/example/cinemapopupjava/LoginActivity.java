@@ -12,9 +12,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cinemapopupjava.Auth.ConexaoFirebase;
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 
 /**
@@ -25,6 +33,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editEmail, editSenha;
     private Button btnLogin, btnCadastro;
     private TextView btnResetSenha;
+    private LoginButton btnLoginFacebook;
+    private CallbackManager newCallbackManager;
 
     private FirebaseAuth auth;
 
@@ -33,7 +43,19 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initComponentes();
+        initFirebaseCallback();
         eventClick();
+    }
+
+    private void initFirebaseCallback() {
+        auth = FirebaseAuth.getInstance();
+        newCallbackManager = CallbackManager.Factory.create();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        newCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     private void eventClick() {
@@ -44,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         btnLogin.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,12 +80,47 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
         btnResetSenha.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this , ResetPassword.class);
                 startActivity(intent);
             }
+        });
+
+        btnLoginFacebook.registerCallback(newCallbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                firebaseLogin(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+                alert("Operação cancelada!");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                alert("Erro ao efetuar o login com o Facebook!");
+            }
+        });
+    }
+
+    private void firebaseLogin(AccessToken accessToken) {
+        AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
+
+        auth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()){
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        alert("Erro de autenticação");
+                    }
+                }
         });
     }
 
@@ -91,6 +149,8 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.btnLoginEntrar);
         btnCadastro = (Button) findViewById(R.id.btnLoginCadastro);
         btnResetSenha = (TextView) findViewById(R.id.txtResetSenha);
+        btnLoginFacebook = (LoginButton) findViewById(R.id.login_facebook_button);
+        btnLoginFacebook.setPermissions("email","public_profile");
     }
 
     @Override
