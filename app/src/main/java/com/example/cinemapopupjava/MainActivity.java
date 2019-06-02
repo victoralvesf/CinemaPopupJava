@@ -1,6 +1,7 @@
 package com.example.cinemapopupjava;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,18 +31,32 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        SharedPreferences prefs = getSharedPreferences("preferenceFile", 0);
+        boolean alreadyLogged = prefs.getBoolean("isLogged", false);
 
-        moviesRepository = MoviesRepository.getInstance();
+        if(alreadyLogged) {
+            // chama a tela inicial
 
-        moviesList = findViewById(R.id.movies_list);
+            setContentView(R.layout.activity_main);
 
-        setupOnScrollListener();
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
 
-        getGenres();
+            moviesRepository = MoviesRepository.getInstance();
+
+            moviesList = findViewById(R.id.movies_list);
+
+            setupOnScrollListener();
+
+            getGenres();
+        }else {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+
     }
 
     @Override
@@ -181,10 +196,10 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(MainActivity.this, "Sem conexão!", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        startActivity(intent);
-    }
+//    @Override
+//    public void onBackPressed() {
+//        Intent intent = new Intent(Intent.ACTION_MAIN);
+//        intent.addCategory(Intent.CATEGORY_HOME);
+//        startActivity(intent);
+//    }
 }

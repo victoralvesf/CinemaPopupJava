@@ -1,6 +1,7 @@
 package com.example.cinemapopupjava;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -117,6 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()){
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
+                        finish();
                     } else {
                         alert("Erro de autenticação");
                     }
@@ -130,6 +132,11 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
+                        SharedPreferences prefs = getSharedPreferences("preferenceFile", 0);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putBoolean("isLogged", true);
+                        editor.commit();
+
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                     } else {
