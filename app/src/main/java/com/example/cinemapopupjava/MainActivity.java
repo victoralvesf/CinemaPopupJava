@@ -13,6 +13,8 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 
+import com.example.cinemapopupjava.Auth.ConexaoFirebase;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,19 +38,12 @@ public class MainActivity extends AppCompatActivity {
         boolean alreadyLogged = prefs.getBoolean("isLogged", false);
 
         if(alreadyLogged) {
-            // chama a tela inicial
-
             setContentView(R.layout.activity_main);
-
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
-
             moviesRepository = MoviesRepository.getInstance();
-
             moviesList = findViewById(R.id.movies_list);
-
             setupOnScrollListener();
-
             getGenres();
         }else {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -71,6 +66,28 @@ public class MainActivity extends AppCompatActivity {
             case R.id.sort:
                 showSortMenu();
                 return true;
+
+            case R.id.profile:
+                Intent intent = new Intent (this, ProfileActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+            case R.id.about:
+                Toast.makeText(this, "Sobre", Toast.LENGTH_LONG).show();
+                return true;
+
+            case R.id.logout:
+                ConexaoFirebase.logOut();
+                SharedPreferences prefs = getSharedPreferences("preferenceFile", 0);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putBoolean("isLogged", false);
+                editor.commit();
+                Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(i);
+                finish();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

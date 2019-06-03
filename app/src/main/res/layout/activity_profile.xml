@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
+    android:orientation="horizontal"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -11,22 +12,13 @@
     android:theme="@style/AppTheme"
     tools:context=".LoginActivity">
 
-    <!-- Login progress -->
-    <ProgressBar
-        android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:visibility="gone" />
-
     <ScrollView
-        android:id="@+id/login_form"
+        android:id="@+id/profilePage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/email_login_form"
+            android:id="@+id/profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -38,21 +30,11 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
                 android:fontFamily="sans-serif-medium"
-                android:text="@string/reset_senha"
+                android:text="@string/profile_title"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="#fff"
                 android:textSize="30sp" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:text="@string/resetPageInfo"
-                android:textAlignment="center"
-                android:textColor="#fff" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -60,27 +42,31 @@
                 android:textColorHint="#fff">
 
                 <AutoCompleteTextView
-                    android:id="@+id/editResetEmail"
+                    android:id="@+id/userEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="25dp"
                     android:maxLines="1"
+                    android:editable="false"
+                    android:focusable="false"
                     android:textColor="#fff" />
 
             </android.support.design.widget.TextInputLayout>
 
             <Button
-                android:id="@+id/btnResetPass"
+                android:id="@+id/btnLogout"
                 style="?android:textAppearanceButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/enviarEmail"
+                android:layout_marginTop="25dp"
+                android:text="@string/logout"
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/btnVoltarLogin"
+                android:id="@+id/btnVoltar"
                 style="?android:textAppearanceButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

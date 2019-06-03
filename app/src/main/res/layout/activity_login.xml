@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
+    android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -96,7 +97,7 @@
 
             <Button
                 android:id="@+id/btnLoginEntrar"
-                style="?android:textAppearanceSmall"
+                style="?android:textAppearanceButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -113,7 +114,7 @@
 
             <Button
                 android:id="@+id/btnLoginCadastro"
-                style="?android:textAppearanceSmall"
+                style="?android:textAppearanceButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -121,5 +122,6 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
+
     </ScrollView>
 </LinearLayout>

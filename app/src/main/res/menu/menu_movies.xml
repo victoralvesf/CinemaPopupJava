@@ -3,6 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/profile"
+        android:title="@string/profile_title"
+        android:enabled="true"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/about"
+        android:title="@string/about"
+        android:enabled="true"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/logout"
+        android:title="@string/logout"
+        android:enabled="true"
+        app:showAsAction="never"/>
+
+    <item
         android:id="@+id/sort"
         android:enabled="true"
         android:icon="@drawable/ic_sort_white_24dp"

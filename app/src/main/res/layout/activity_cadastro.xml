@@ -107,7 +107,7 @@
 
             <Button
                 android:id="@+id/btnNewCadastro"
-                style="?android:textAppearanceSmall"
+                style="?android:textAppearanceButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -116,7 +116,7 @@
 
             <Button
                 android:id="@+id/btnVoltarLogin"
-                style="?android:textAppearanceSmall"
+                style="?android:textAppearanceButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
