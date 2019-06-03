@@ -116,6 +116,11 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
+                        SharedPreferences prefs = getSharedPreferences("preferenceFile", 0);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putBoolean("isLogged", true);
+                        editor.commit();
+                        
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
