@@ -32,12 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
         SharedPreferences prefs = getSharedPreferences("preferenceFile", 0);
         boolean alreadyLogged = prefs.getBoolean("isLogged", false);
 
         if(alreadyLogged) {
+            super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
@@ -54,6 +54,48 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//        SharedPreferences prefs = getSharedPreferences("preferenceFile", 0);
+//        boolean alreadyLogged = prefs.getBoolean("isLogged", false);
+//
+//        if(alreadyLogged) {
+//            Toolbar toolbar = findViewById(R.id.toolbar);
+//            setSupportActionBar(toolbar);
+//            moviesRepository = MoviesRepository.getInstance();
+//            moviesList = findViewById(R.id.movies_list);
+//            setupOnScrollListener();
+//            getGenres();
+//        }else {
+//            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
+//    }
+//
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+//        SharedPreferences prefs = getSharedPreferences("preferenceFile", 0);
+//        boolean alreadyLogged = prefs.getBoolean("isLogged", false);
+//
+//        if(alreadyLogged) {
+//            Toolbar toolbar = findViewById(R.id.toolbar);
+//            setSupportActionBar(toolbar);
+//            moviesRepository = MoviesRepository.getInstance();
+//            moviesList = findViewById(R.id.movies_list);
+//            setupOnScrollListener();
+//            getGenres();
+//        }else {
+//            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
+//    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_movies, menu);
@@ -68,9 +110,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.profile:
-                Intent intent = new Intent (this, ProfileActivity.class);
+                Intent intent = new Intent (MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
-                finish();
                 return true;
 
             case R.id.about:
@@ -78,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.logout:
-                ConexaoFirebase.logOut();
                 SharedPreferences prefs = getSharedPreferences("preferenceFile", 0);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putBoolean("isLogged", false);
@@ -213,10 +253,4 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(MainActivity.this, "Sem conexão!", Toast.LENGTH_SHORT).show();
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        Intent intent = new Intent(Intent.ACTION_MAIN);
-//        intent.addCategory(Intent.CATEGORY_HOME);
-//        startActivity(intent);
-//    }
 }
