@@ -38,8 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putBoolean("isLogged", false);
                 editor.commit();
-                Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
-                startActivity(intent);
+                setResult(666);
                 finish();
             }
         });
@@ -47,9 +46,17 @@ public class ProfileActivity extends AppCompatActivity {
         btnVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setResult(12);
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setResult(12);
+        finish();
     }
 
     private void initComponents() {

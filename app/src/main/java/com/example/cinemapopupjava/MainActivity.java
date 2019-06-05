@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 
 import com.example.cinemapopupjava.Auth.ConexaoFirebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -29,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
     private boolean isFetchingMovies;
     private int currentPage = 1;
     private String sortBy = MoviesRepository.POPULAR;
+
+    private FirebaseAuth auth;
+    private FirebaseUser user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,47 +61,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//
-//        SharedPreferences prefs = getSharedPreferences("preferenceFile", 0);
-//        boolean alreadyLogged = prefs.getBoolean("isLogged", false);
-//
-//        if(alreadyLogged) {
-//            Toolbar toolbar = findViewById(R.id.toolbar);
-//            setSupportActionBar(toolbar);
-//            moviesRepository = MoviesRepository.getInstance();
-//            moviesList = findViewById(R.id.movies_list);
-//            setupOnScrollListener();
-//            getGenres();
-//        }else {
-//            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
-//    }
-//
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        SharedPreferences prefs = getSharedPreferences("preferenceFile", 0);
-//        boolean alreadyLogged = prefs.getBoolean("isLogged", false);
-//
-//        if(alreadyLogged) {
-//            Toolbar toolbar = findViewById(R.id.toolbar);
-//            setSupportActionBar(toolbar);
-//            moviesRepository = MoviesRepository.getInstance();
-//            moviesList = findViewById(R.id.movies_list);
-//            setupOnScrollListener();
-//            getGenres();
-//        }else {
-//            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
-//    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        auth = ConexaoFirebase.getFirebaseAuth();
+        user = ConexaoFirebase.getFirebaseUser();
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 666 && resultCode == 666){
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -112,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.profile:
                 Intent intent = new Intent (MainActivity.this, ProfileActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 666);
                 return true;
 
             case R.id.about:
