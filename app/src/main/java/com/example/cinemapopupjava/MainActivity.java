@@ -32,12 +32,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         SharedPreferences prefs = getSharedPreferences("preferenceFile", 0);
         boolean alreadyLogged = prefs.getBoolean("isLogged", false);
 
         if(alreadyLogged) {
-            super.onCreate(savedInstanceState);
+
             setContentView(R.layout.activity_main);
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
@@ -115,7 +116,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.about:
-                Toast.makeText(this, "Sobre", Toast.LENGTH_LONG).show();
+                Intent intentAbout = new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(intentAbout);
                 return true;
 
             case R.id.logout:

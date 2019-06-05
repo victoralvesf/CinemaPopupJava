@@ -22,4 +22,6 @@
     <string name="profile_title">Perfil</string>
     <string name="logout">Sair</string>
     <string name="about">Sobre</string>
+    <string name="app_version">Versão 1.1.19</string>
+    <string name="copyright">©CinemaPopup 2019 - All Rights Reserved</string>
 </resources>
